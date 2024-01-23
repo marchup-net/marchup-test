@@ -1,0 +1,8 @@
+Python test scripts are checked into this directory. Use pytest to run tests
+
+Tests use pytest, pytest-selenium and selenium. To install them, run
+    pip install pytest pytest-selenium selenium
+
+Install a WebDriver for each browser that should be tested (e.g., chromedriver for Chrome).
+
+
