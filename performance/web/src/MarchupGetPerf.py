@@ -1,3 +1,4 @@
+import os
 from locust import HttpUser, task, between
 from bs4 import BeautifulSoup  # You'll need BeautifulSoup installed (`pip install beautifulsoup4`)
 
@@ -13,24 +14,31 @@ class MarchupUser(HttpUser):
         self.login(csrf_token)
 
     def login(self, csrf_token):
+        # Read username and password from environment variables
+        username = os.getenv('testuser', 'test1')  # Fallback to 'test1' if not set
+        password = os.getenv('testpassword', 'test1')  # Fallback to 'test1' if not set
+        
+        #print("Logging in user " + username + " password " + password)
+
         # Ensure the POST data is structured correctly, considering how your backend expects it
         login_data = {
             '_csrf': csrf_token,
-            'Login[username]': 'test1',  
-            'Login[password]': 'test1',  
+            'Login[username]': username,  
+            'Login[password]': password,  
             'Login[rememberMe]': '1'
         }
 
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'Referer': 'http://127.0.0.1:8888/user/auth/login'
+            'Referer': self.client.base_url + "/user/auth/login"
         }
 
-        with self.client.post("/user/auth/login", data=login_data, headers=headers, catch_response=True) as response:
-            if response.status_code in [200, 302]:
+        with self.client.post("/user/auth/login", data=login_data, headers=headers, allow_redirects=False, catch_response=True) as response:
+            if response.status_code in [200, 302] and '_identity' in response.cookies:
                 response.success()
             else:
-                response.failure(f"Failed to log in. Status code: {response.status_code}")
+                print("Login failed. Identity cookie not found or incorrect status code " + str(response.status_code))
+                response.failure("Failed to log in. Identity cookie not set.")
 
     @task
     def after_login(self):
