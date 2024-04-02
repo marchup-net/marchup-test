@@ -1,3 +1,8 @@
+# Run this script using locust. You can control locust by accessing http://127.0.0.1:8089
+# Use pip install to download required python files including locust
+# In order to automatically restart locust when the script is updated you can use nodemon (installed with npm) as follows
+#     nodemon --exec "locust -f MarchupGetPerf.py" --watch MarchupGetPerf.py
+
 import os
 from locust import HttpUser, task, between
 from bs4 import BeautifulSoup  # You'll need BeautifulSoup installed (`pip install beautifulsoup4`)
