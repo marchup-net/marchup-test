@@ -2,7 +2,7 @@
 
 * The main development branch where all code finally needs to be merged is devel. We use feature branch-based development under devel.
 * Clone the marchup repo and the submodule repos using
-	git clone --recursive https://git-codecommit.us-west-2.amazonaws.com/v1/repos/marchup 
+	git clone --recursive https://git-codecommit.us-west-2.amazonaws.com/v1/repos/marchup-test
 
 * Create a separate git branch under devel for each effort (feature/bugfix)
 	git checkout -b new-feature-branch
@@ -21,7 +21,7 @@
 ** Before the first pull request
 ** Install aws CLI. Refer to https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 ** Run “aws configure” with AWS Access Key ID and Secret Access Key given by project lead. Set default region to us-west-2 and default output format to json
-** aws codecommit create-pull-request --title "New Feature" --description "Adding a new feature required for FEATURE_DESCRIPTION" --targets repositoryName=marchup-test,sourceReference=new-feature-branch,destinationReference=devel
+** aws codecommit create-pull-request --title "New Feature" --description "Adding a new feature required for FEATURE_DESCRIPTION" --targets '{"repositoryName":"marchup-test", "sourceReference":"new-feature-branch", "destinationReference":"devel"}'
 ** The project lead will review and approve the code for merge into devel
 
 
