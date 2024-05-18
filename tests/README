@@ -3,6 +3,11 @@ Python test scripts are checked into this directory. Use pytest to run tests
 Tests use pytest, pytest-selenium and selenium. To install them, run
     pip install pytest pytest-selenium selenium
 
-Install a WebDriver for each browser that should be tested (e.g., chromedriver for Chrome).
+To run all tests, use command
+    pytest marchup_test_framework.py -s
 
+To run a specific test, use command
+    pytest marchup_test_framework.py -k FUNCTION NAME -s
+where FUNCTION NAME is one of the functions in the marchup_test_framework.py
 
+Note: Use only Chrome webdriver when prompted
