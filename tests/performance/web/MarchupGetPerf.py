@@ -7,6 +7,12 @@ import os
 from locust import HttpUser, task, between
 from bs4 import BeautifulSoup  # You'll need BeautifulSoup installed (`pip install beautifulsoup4`)
 
+# Ensure required environment variables are set
+required_env_vars = ['MARCHUP_USERNAME', 'MARCHUP_PASSWORD']
+for var in required_env_vars:
+    if var not in os.environ:
+        raise EnvironmentError(f"Required environment variable {var} is not set.")
+
 class MarchupUser(HttpUser):
     wait_time = between(1, 5)
 
@@ -20,16 +26,16 @@ class MarchupUser(HttpUser):
 
     def login(self, csrf_token):
         # Read username and password from environment variables
-        username = os.getenv('testuser', 'test1')  # Fallback to 'test1' if not set
-        password = os.getenv('testpassword', 'test1')  # Fallback to 'test1' if not set
+        username = os.getenv('MARCHUP_USERNAME')
+        password = os.getenv('MARCHUP_PASSWORD')
         
         #print("Logging in user " + username + " password " + password)
 
         # Ensure the POST data is structured correctly, considering how your backend expects it
         login_data = {
             '_csrf': csrf_token,
-            'Login[username]': username,  
-            'Login[password]': password,  
+            'Login[username]': username,
+            'Login[password]': password,
             'Login[rememberMe]': '1'
         }
 
@@ -51,3 +57,4 @@ class MarchupUser(HttpUser):
         #print("Fetch dashboard and spaces")
         self.client.get("/dashboard")
         self.client.get("/spaces")
+
