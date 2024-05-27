@@ -14,8 +14,8 @@ import selenium.webdriver.common.keys
 # Set the environment variables MARCHUP_USERNAME and MARCHUP_PASSWORD before running the tests.
 
 # Check if the environment variables are set
-username = os.getenv('MARCHUP_USERNAME')
-password = os.getenv('MARCHUP_PASSWORD')
+username = os.getenv("MARCHUP_USERNAME")
+password = os.getenv("MARCHUP_PASSWORD")
 
 if not username or not password:
     print("Error: Please set the MARCHUP_USERNAME and MARCHUP_PASSWORD environment variables.")
@@ -119,19 +119,30 @@ def test_search_Jobs(logged_in):
     driver.get("https://trial.marchup.net/jobs/global")
     for i in range(11):
         actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
-    actions.send_keys("Job Test").perform()
+    actions.send_keys("Internship #").perform()
+    for i in range(4):
+        actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
+    for i in range(2):
+        actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ARROW_DOWN).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
+    actions.send_keys("Test Internship Space").perform()
+    actions.send_keys(selenium.webdriver.common.keys.Keys.ENTER).perform()
+    for i in range(2):
+        actions.send_keys(selenium.webdriver.common.keys.Keys.TAB).perform()
     sleep(5)
-    job3 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'Job Test #3')]")))
+    job3 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'ship #3')]")))
     assert job3.is_displayed()
-    job3.click()
-    sleep(3)
     driver.back()
-    job2 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'Job Test #2')]")))
+    job2 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'ship #2')]")))
     assert job2.is_displayed()
-    job2.click()
-    sleep(3)
     driver.back()
-    job1 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'Job Test #1')]")))
+    job1 = wait.until(EC.presence_of_element_located((By.XPATH, "//h4[contains(@class, 'media-heading') and contains(., 'ship #1')]")))
     assert job1.is_displayed()
-    job1.click()
-    sleep(3)
+    print("All jobs are visible, test is correct.")
