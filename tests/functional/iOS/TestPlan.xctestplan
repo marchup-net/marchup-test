@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "856B7DEF-C3D0-4B79-9800-4D972C8E04D7",
+      "id" : "7B532E98-2806-4B48-B86A-F531514108AB",
       "name" : "Configuration 1",
       "options" : {
 
@@ -12,13 +12,7 @@
     "testTimeoutsEnabled" : true
   },
   "testTargets" : [
-    {
-      "target" : {
-        "containerPath" : "container:testFramework.xcodeproj",
-        "identifier" : "6FEBA13C2C05271800F9697E",
-        "name" : "Take2Tests"
-      }
-    }
+
   ],
   "version" : 1
 }
