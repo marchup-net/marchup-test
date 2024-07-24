@@ -1,7 +1,5 @@
 # Instructions for iOS App Testing on MacOS
-1. Download TestFlight on the App Store
-
-2. Click Accept in Email Invitation to beta application, then install Marchup from TestFlight
+1. Download Marchup in the App Store
 
 3. Open App on Mac
    
@@ -11,7 +9,9 @@
 
 6. Select test destination with Product>Destination>My Mac(Mac Catalyst)
 
-7. Replace the INSERT_USERNAME and INSERT_PASSWORD with your username and password
+7. Create test users for the sign up test, with the prefix marchup-test in front of the email. The OTP will be mm/dd/yy in the form mmddyy
+
+8. Replace the various INSERT parameters with the correct information
  
-8. Run test with Cmd+U
+9. Run test with Cmd+U or by clicking the play button next to each test to run specific tests
 
